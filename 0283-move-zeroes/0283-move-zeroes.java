@@ -11,7 +11,7 @@ class Solution {
             }
         }
        
-       if(j!=-1 && nums.length>0)
+       if(j!=-1)
        {
            for(int i=j+1;i<nums.length;i++){
                if(nums[i]!=0)
