@@ -1,18 +1,45 @@
 class Solution {
-    public int maximumCount(int[] nums) {
-        int posCount=0;
-        int negCount=0;
-        for(int i=0;i<nums.length;i++)
+    public static int lastNeg(int nums[])
+    {
+        int start=0;
+        int end=nums.length-1;
+        int neg=-1;
+        while(start<=end)
         {
-            if(nums[i]>0)
+            int mid=(start+end)/2;
+            if(nums[mid]<0)
             {
-                posCount++;
+                start=mid+1;
+                neg=mid;
             }
-            else if(nums[i]<0)
-            {
-                negCount++;
+            else{
+                end=mid-1;
             }
         }
-        return Math.max(negCount,posCount);
+        return neg;
+    }
+    public static int lastPositive(int nums[])
+    {
+        int start=0;
+        int end=nums.length-1;
+        int pos=nums.length;
+        while(start<=end)
+        {
+            int mid=(start+end)/2;
+            if(nums[mid]>0)
+            {
+                pos=mid;
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+        }
+        return pos;
+    }
+    public int maximumCount(int[] nums) {
+       int negativeCount=lastNeg(nums)+1;
+        int positiveCount=nums.length-lastPositive(nums);
+        return Math.max(negativeCount,positiveCount);
     }
 }
